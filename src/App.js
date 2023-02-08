@@ -1,9 +1,12 @@
 import MapView from './MapView';
+import ProgressContextProvider from './ProgressContext';
 
 function App() {
 	return (
 		<div className="App">
-			<MapView />
+			<ProgressContextProvider>
+				<MapView />
+			</ProgressContextProvider>
 		</div>
 	);
 }
