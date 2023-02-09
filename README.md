@@ -56,8 +56,10 @@ npm start
 timstamp, longitude, latitude
 ```
 Be careful with + and - signs of longitudes and latitudes. </br>
-+ + : North and East </br>
-+ - : North and West </br>
-- - : South and West </br>
-- + : South and East </br>
+```sh
++ + : North and East
++ - : North and West
+- - : South and West
+- + : South and East
+```
 
