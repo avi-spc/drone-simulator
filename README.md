@@ -63,3 +63,6 @@ Be careful with + and - signs of longitudes and latitudes. </br>
 - + : South and East
 ```
 
+-   After the data has been loaded, play/pause simulation as required.
+-   Seek bar has been also provided to control the simulation back and forth.   
+
