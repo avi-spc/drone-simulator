@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext, Fragment } from 'react';
 import { Source, Layer } from 'react-map-gl';
 
-import { baseRouteLayer, droneLayer, elapsedRouteLayer } from './LayerStyles';
+import { baseRouteLayer, checkPointsLayer, droneLayer, elapsedRouteLayer } from './LayerStyles';
 import { ProgressContext } from '../contexts/ProgressContext';
 
-const DroneLayer = ({ route, totalRouteTime }) => {
+const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
 	const [currentLocation, setCurrentLocation] = useState(
 		route.features[0].geometry.coordinates[0]
 	);
@@ -57,7 +57,7 @@ const DroneLayer = ({ route, totalRouteTime }) => {
 		if (progress >= route.features[0].geometry.coordinates.length) {
 			pause();
 		}
-
+		console.log(elapsedTime);
 		setCurrentLocation(route.features[0].geometry.coordinates[progress]);
 		setDronePosition({
 			type: 'FeatureCollection',
@@ -93,11 +93,14 @@ const DroneLayer = ({ route, totalRouteTime }) => {
 			<Source id="route" type="geojson" data={route}>
 				<Layer {...baseRouteLayer} />
 			</Source>
-			<Source id="drone" type="geojson" data={dronePosition}>
-				<Layer {...droneLayer} />
-			</Source>
 			<Source id="cRroute" type="geojson" data={elapsedRoute}>
 				<Layer {...elapsedRouteLayer} />
+			</Source>
+			<Source id="checkPoints" type="geojson" data={checkPoints}>
+				<Layer {...checkPointsLayer} />
+			</Source>
+			<Source id="drone" type="geojson" data={dronePosition}>
+				<Layer {...droneLayer} />
 			</Source>
 		</Fragment>
 	);

@@ -8,7 +8,7 @@ import { ProgressContext } from '../contexts/ProgressContext';
 import { DataContext } from '../contexts/DataContext';
 
 const MapView = () => {
-	const { route, totalTime } = useContext(DataContext);
+	const { route, checkPoints, totalTime } = useContext(DataContext);
 	const [viewState, setViewState] = useState({ longitude: -122.414, latitude: 37.776, zoom: 6 });
 	const { isPlaying, play, pause, progress, setSeekLocation, animationRef } =
 		useContext(ProgressContext);
@@ -23,7 +23,11 @@ const MapView = () => {
 			>
 				{route && (
 					<Fragment>
-						<DroneLayer route={route} totalRouteTime={totalTime} />
+						<DroneLayer
+							route={route}
+							checkPoints={checkPoints}
+							totalRouteTime={totalTime}
+						/>
 					</Fragment>
 				)}
 			</Map>

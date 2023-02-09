@@ -8,15 +8,30 @@ const DataContextProvider = (props) => {
 	const [coordinates, setCoordinates] = useState([]);
 	const [totalTime, setTotalTime] = useState(0);
 	const [route, setRoute] = useState(null);
+	const [checkPoints, setCheckPoints] = useState(null);
 
 	const initData = (newData) => {
 		setData(newData);
 		setCoordinates(newData.map((dataEntry) => [dataEntry[1], dataEntry[2]]));
-		setTotalTime(Number(newData[newData.length - 1][0].split(':')[2]));
+		setTotalTime(
+			Number(newData[newData.length - 1][0].split(':')[2]) -
+				Number(newData[0][0].split(':')[2])
+		);
 	};
 
 	const setRouteData = () => {
 		if (data.length) {
+			setCheckPoints({
+				type: 'FeatureCollection',
+				features: coordinates.map((coordinate) => ({
+					type: 'Feature',
+					geometry: {
+						type: 'Point',
+						coordinates: coordinate
+					}
+				}))
+			});
+
 			const routeFeature = {
 				type: 'FeatureCollection',
 				features: [
@@ -42,11 +57,12 @@ const DataContextProvider = (props) => {
 			routeFeature.features[0].geometry.coordinates = arc;
 			setRoute(routeFeature);
 		}
-		// console.log(routeFeature.features[0].geometry.coordinates.length);
 	};
 
 	return (
-		<DataContext.Provider value={{ totalTime, coordinates, route, initData, setRouteData }}>
+		<DataContext.Provider
+			value={{ totalTime, coordinates, route, checkPoints, initData, setRouteData }}
+		>
 			{props.children}
 		</DataContext.Provider>
 	);
