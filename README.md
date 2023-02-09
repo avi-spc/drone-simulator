@@ -53,7 +53,7 @@ npm start
 
 #### Data format
 ```sh
-timstamp, longitude, latitude
+timstamp(h:m:s), longitude, latitude
 ```
 Be careful with + and - signs of longitudes and latitudes. </br>
 ```sh
