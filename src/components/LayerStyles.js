@@ -22,7 +22,7 @@ export const droneLayer = {
 export const checkPointsLayer = {
 	type: 'circle',
 	paint: {
-		'circle-radius': 6,
+		'circle-radius': 10,
 		'circle-color': '#6cb6ff', //6cb6ff
 		'circle-opacity': 1
 	}
@@ -35,8 +35,8 @@ export const elapsedRouteLayer = {
 		'line-cap': 'round'
 	},
 	paint: {
-		'line-color': '#5a5a5e',
-		'line-width': 4
+		'line-color': '#cb9efb',
+		'line-width': 10
 	}
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, Fragment } from 'react';
-import { Source, Layer } from 'react-map-gl';
+import { Source, Layer, Marker } from 'react-map-gl';
 
 import { baseRouteLayer, checkPointsLayer, droneLayer, elapsedRouteLayer } from './LayerStyles';
 import { ProgressContext } from '../contexts/ProgressContext';
@@ -54,10 +54,9 @@ const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
 	}, [isPlaying, animationRef.current]);
 
 	useEffect(() => {
-		if (progress >= route.features[0].geometry.coordinates.length) {
+		if (progress >= route.features[0].geometry.coordinates.length - 1) {
 			pause();
 		}
-		console.log(elapsedTime);
 		setCurrentLocation(route.features[0].geometry.coordinates[progress]);
 		setDronePosition({
 			type: 'FeatureCollection',
@@ -99,9 +98,30 @@ const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
 			<Source id="checkPoints" type="geojson" data={checkPoints}>
 				<Layer {...checkPointsLayer} />
 			</Source>
-			<Source id="drone" type="geojson" data={dronePosition}>
+			{checkPoints.features.map((feature, index) => (
+				<Marker
+					key={Math.random()}
+					longitude={feature.geometry.coordinates[0]}
+					latitude={feature.geometry.coordinates[1]}
+					anchor="center"
+				>
+					<img src="" />
+
+					{index}
+				</Marker>
+			))}
+			{/* <Source id="drone" type="geojson" data={dronePosition}>
 				<Layer {...droneLayer} />
-			</Source>
+			</Source> */}
+			{dronePosition.features[0].geometry.coordinates.length && (
+				<Marker
+					longitude={dronePosition.features[0].geometry.coordinates[0]}
+					latitude={dronePosition.features[0].geometry.coordinates[1]}
+					anchor="bottom"
+				>
+					<img src="/images/marker.png" />
+				</Marker>
+			)}
 		</Fragment>
 	);
 };

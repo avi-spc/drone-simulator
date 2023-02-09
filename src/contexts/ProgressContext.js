@@ -22,7 +22,7 @@ const ProgressContextProvider = (props) => {
 	};
 
 	const initProgress = () => {
-		setProgress((prevProgress) => prevProgress + 1);
+		setProgress((prevProgress) => (prevProgress + 1) % 2000);
 	};
 
 	return (

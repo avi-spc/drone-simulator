@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment } from 'react';
+import { useState, useContext, Fragment, useRef, useEffect } from 'react';
 import Map from 'react-map-gl';
 
 import DroneLayer from './DroneLayer';
@@ -6,6 +6,7 @@ import FileUpload from '../utils/FileUpload';
 
 import { ProgressContext } from '../contexts/ProgressContext';
 import { DataContext } from '../contexts/DataContext';
+import ManualUpload from '../utils/ManualUpload';
 
 const MapView = () => {
 	const { route, checkPoints, totalTime } = useContext(DataContext);
@@ -14,31 +15,27 @@ const MapView = () => {
 		useContext(ProgressContext);
 
 	return (
-		<div id="map">
-			<Map
-				mapboxAccessToken={process.env.REACT_APP_PUBLIC_MAPBOX_TOKEN}
-				{...viewState}
-				onMove={(evt) => setViewState(evt.viewState)}
-				mapStyle="mapbox://styles/mapbox/dark-v11"
-			>
-				{route && (
-					<Fragment>
-						<DroneLayer
-							route={route}
-							checkPoints={checkPoints}
-							totalRouteTime={totalTime}
-						/>
-					</Fragment>
-				)}
-			</Map>
-
+		<div className="app-container">
+			<div className="map">
+				<Map
+					mapboxAccessToken={process.env.REACT_APP_PUBLIC_MAPBOX_TOKEN}
+					{...viewState}
+					onMove={(evt) => setViewState(evt.viewState)}
+					mapStyle="mapbox://styles/mapbox/dark-v11"
+				>
+					{route && (
+						<Fragment>
+							<DroneLayer
+								route={route}
+								checkPoints={checkPoints}
+								totalRouteTime={totalTime}
+							/>
+						</Fragment>
+					)}
+				</Map>
+			</div>
 			{route && (
 				<Fragment>
-					{isPlaying ? (
-						<button onClick={pause}>Pause</button>
-					) : (
-						<button onClick={play}>Play</button>
-					)}
 					<input
 						type="range"
 						min={0}
@@ -53,8 +50,25 @@ const MapView = () => {
 					/>
 				</Fragment>
 			)}
-
-			<FileUpload />
+			<div className="action-group">
+				<div className="upload-actions">
+					<FileUpload />
+					<ManualUpload />
+				</div>
+				{route && (
+					<Fragment>
+						{isPlaying ? (
+							<button className="btn" onClick={pause}>
+								Pause
+							</button>
+						) : (
+							<button className="btn" onClick={play}>
+								Play
+							</button>
+						)}
+					</Fragment>
+				)}
+			</div>
 		</div>
 	);
 };

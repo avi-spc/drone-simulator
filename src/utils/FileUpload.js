@@ -1,18 +1,12 @@
 import { useContext, useEffect } from 'react';
+
 import { DataContext } from '../contexts/DataContext';
+import { ProgressContext } from '../contexts/ProgressContext';
+import { csvToArray } from './CsvParser';
 
 const FileUpload = () => {
 	const { coordinates, initData, setRouteData } = useContext(DataContext);
-
-	const csvToArray = (str, delimiter = ',') => {
-		const rows = str.split('\n');
-
-		const arr = rows.map((row) =>
-			row.split(delimiter).map((value, index) => (index === 0 ? value : +value))
-		);
-
-		return arr;
-	};
+	const { isPlaying, pause, setSeekLocation } = useContext(ProgressContext);
 
 	const handleFileChange = (e) => {
 		if (e.target.files.length) {
@@ -28,6 +22,9 @@ const FileUpload = () => {
 
 			reader.readAsText(inputFile);
 		}
+
+		pause();
+		setSeekLocation(0);
 	};
 
 	useEffect(() => {
@@ -36,7 +33,20 @@ const FileUpload = () => {
 
 	return (
 		<div>
-			<input type="file" id="csvFile" accept=".csv" onChange={handleFileChange} />
+			<label
+				htmlFor="csvFile"
+				className={`btn ${isPlaying ? 'disabled' : ''}`}
+				disabled={isPlaying}
+			>
+				Load
+			</label>
+			<input
+				type="file"
+				id="csvFile"
+				accept=".csv"
+				onChange={handleFileChange}
+				className="hidden"
+			/>
 		</div>
 	);
 };
