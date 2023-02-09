@@ -45,3 +45,19 @@ npm start
 ##### External API for Geolocation data
 
 -   [Mapbox](https://www.mapbox.com)
+
+### How to use
+
+-   Load the data from a .csv file. Sample file is provided in 'public/images' folder.
+-   Alternatively we can also load data manually in the same format.
+
+#### Data format
+```sh
+timstamp, longitude, latitude
+```
+Be careful with + and - signs of longitudes and latitudes. </br>
++ + : North and East </br>
++ - : North and West </br>
+- - : South and West </br>
+- + : South and East </br>
+
