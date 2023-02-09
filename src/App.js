@@ -1,12 +1,15 @@
-import MapView from './MapView';
-import ProgressContextProvider from './ProgressContext';
+import DataContextProvider from './contexts/DataContext';
+import MapView from './components/MapView';
+import ProgressContextProvider from './contexts/ProgressContext';
 
 function App() {
 	return (
 		<div className="App">
-			<ProgressContextProvider>
-				<MapView />
-			</ProgressContextProvider>
+			<DataContextProvider>
+				<ProgressContextProvider>
+					<MapView />
+				</ProgressContextProvider>
+			</DataContextProvider>
 		</div>
 	);
 }
