@@ -78,6 +78,14 @@ label {
   cursor: pointer;
 }
 
+.btn--green {
+  background-color: #8ddb8c;
+}
+
+.btn--red {
+  background-color: #ff938b;
+}
+
 .btn:hover{
   background-color: #96d0ff;
 }

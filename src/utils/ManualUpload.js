@@ -5,7 +5,8 @@ import { csvToArray } from './CsvParser';
 
 const ManualUpload = () => {
 	const { initData } = useContext(DataContext);
-	const { isPlaying } = useContext(ProgressContext);
+	const { pause, setSeekLocation } = useContext(ProgressContext);
+
 	const [timeseries, setTimeseries] = useState('');
 	const [popup, setPopup] = useState(false);
 
@@ -13,6 +14,9 @@ const ManualUpload = () => {
 		e.preventDefault();
 		initData(csvToArray(timeseries));
 		setPopup(false);
+		
+		pause();
+		setSeekLocation(0);
 	};
 
 	const closePopup = (e) => {
@@ -32,14 +36,16 @@ const ManualUpload = () => {
 							value={timeseries}
 							onChange={(e) => setTimeseries(e.target.value)}
 						/>
-						<button className="btn" onClick={confirmData}>Confirm</button>
+						<button className="btn" onClick={confirmData}>
+							Confirm
+						</button>
 						<button className="btn" onClick={closePopup}>
 							Cancel
 						</button>
 					</form>
 				</div>
 			)}
-			<button className="btn" onClick={() => setPopup(true)} disabled={isPlaying}>
+			<button className="btn" onClick={() => setPopup(true)}>
 				Manual Data
 			</button>
 		</Fragment>

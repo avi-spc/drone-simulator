@@ -10,9 +10,20 @@ import ManualUpload from '../utils/ManualUpload';
 
 const MapView = () => {
 	const { route, checkPoints, totalTime } = useContext(DataContext);
-	const [viewState, setViewState] = useState({ longitude: -122.414, latitude: 37.776, zoom: 6 });
+	const [viewState, setViewState] = useState({ longitude: 0, latitude: 0, zoom: 3 });
 	const { isPlaying, play, pause, progress, setSeekLocation, animationRef } =
 		useContext(ProgressContext);
+
+	useEffect(() => {
+		if (route) {
+			setViewState({
+				...viewState,
+				longitude: checkPoints.features[0].geometry.coordinates[0],
+				latitude: checkPoints.features[0].geometry.coordinates[1],
+				zoom: 6
+			});
+		}
+	}, [route]);
 
 	return (
 		<div className="app-container">
@@ -58,12 +69,12 @@ const MapView = () => {
 				{route && (
 					<Fragment>
 						{isPlaying ? (
-							<button className="btn" onClick={pause}>
+							<button className="btn btn--red" onClick={pause}>
 								Pause
 							</button>
 						) : (
-							<button className="btn" onClick={play}>
-								Play
+							<button className="btn btn--green" onClick={play}>
+								Simulate
 							</button>
 						)}
 					</Fragment>

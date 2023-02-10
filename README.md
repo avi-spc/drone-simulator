@@ -48,7 +48,7 @@ npm start
 
 ### How to use
 
--   Load the data from a .csv file. Sample file is provided in 'public/images' folder.
+-   Load the data from a .csv file. Sample file is provided in 'public/data' folder.
 -   Alternatively we can also load data manually in the same format.
 
 #### Data format

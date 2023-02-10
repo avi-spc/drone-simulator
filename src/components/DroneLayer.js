@@ -5,11 +5,11 @@ import { baseRouteLayer, checkPointsLayer, droneLayer, elapsedRouteLayer } from 
 import { ProgressContext } from '../contexts/ProgressContext';
 
 const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
-	const [currentLocation, setCurrentLocation] = useState(
-		route.features[0].geometry.coordinates[0]
-	);
-	const { isPlaying, pause, animationRef, progress, initProgress } = useContext(ProgressContext);
+	// const [currentLocation, setCurrentLocation] = useState(
+	// 	route.features[0].geometry.coordinates[0]
+	// );
 	// const [completedRoute, setCompletedRoute] = useState([currentLocation]);
+	const { isPlaying, pause, animationRef, progress, initProgress } = useContext(ProgressContext);
 	const [elapsedTime, setElapsedTime] = useState(0);
 
 	const [dronePosition, setDronePosition] = useState({
@@ -57,7 +57,7 @@ const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
 		if (progress >= route.features[0].geometry.coordinates.length - 1) {
 			pause();
 		}
-		setCurrentLocation(route.features[0].geometry.coordinates[progress]);
+		// setCurrentLocation(route.features[0].geometry.coordinates[progress]);
 		setDronePosition({
 			type: 'FeatureCollection',
 			features: [
@@ -92,7 +92,7 @@ const DroneLayer = ({ route, checkPoints, totalRouteTime }) => {
 			<Source id="route" type="geojson" data={route}>
 				<Layer {...baseRouteLayer} />
 			</Source>
-			<Source id="cRroute" type="geojson" data={elapsedRoute}>
+			<Source id="elapsedRroute" type="geojson" data={elapsedRoute}>
 				<Layer {...elapsedRouteLayer} />
 			</Source>
 			<Source id="checkPoints" type="geojson" data={checkPoints}>

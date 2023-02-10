@@ -6,7 +6,7 @@ import { csvToArray } from './CsvParser';
 
 const FileUpload = () => {
 	const { coordinates, initData, setRouteData } = useContext(DataContext);
-	const { isPlaying, pause, setSeekLocation } = useContext(ProgressContext);
+	const { pause, setSeekLocation } = useContext(ProgressContext);
 
 	const handleFileChange = (e) => {
 		if (e.target.files.length) {
@@ -33,11 +33,7 @@ const FileUpload = () => {
 
 	return (
 		<div>
-			<label
-				htmlFor="csvFile"
-				className={`btn ${isPlaying ? 'disabled' : ''}`}
-				disabled={isPlaying}
-			>
+			<label htmlFor="csvFile" className="btn">
 				Load
 			</label>
 			<input
