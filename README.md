@@ -4,6 +4,16 @@
 
 Drone simulator that performs drone motion based on time series data of longitudes and latitudes.
 
+### Creating Mapbox API key
+
+-   Create `.env.local` file in root folder with the following data:
+
+```js
+REACT_APP_PUBLIC_MAPBOX_TOKEN = "YOUR_API_KEY_HERE"
+```
+
+-   Mapbox account is required for API key which can be created here. [Mapbox](https://www.mapbox.com)
+
 ### Running Local Development
 
 -   Clone the repo
