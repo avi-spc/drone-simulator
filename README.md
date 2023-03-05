@@ -2,7 +2,7 @@
 
 ### About
 
-Drone simulator that performs drone motion based on time series data of longitudes and latitudes.
+Simulation platform to imitate and track drone’s movement on the world map based on chronological data of latitudes and longitudes from real life.
 
 ### Creating Mapbox API key
 
